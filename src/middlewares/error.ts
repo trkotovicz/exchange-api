@@ -10,7 +10,7 @@ const errorHandler: ErrorRequestHandler = (
   _next
 ) => {
   // verifica se o erro é uma instância do sqlite
-  // if (err instanceof sqlite3.DatabaseError) {
+  // if (err instanceof sqlite3.Database) {
   //   return res.status(StatusCodes.BAD_REQUEST).json(err.message);
   // }
 
