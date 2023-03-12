@@ -18,10 +18,9 @@ export default class UserController {
     res.status(StatusCodes.OK).json({ id, username });
   }
 
-  getUserByUsername = async (req: Request, res: Response) => {
-    const { q } = req.query;
-    const user = await this.userService.getUserByUsername(String(q));
-    const { id, username } = user;
-    res.status(StatusCodes.OK).json({ id, username });
+  login = async (req: Request, res: Response) => {
+    const { username, password } = req.body;
+    const user = await this.userService.login(username, password);
+    res.status(StatusCodes.OK).json(user);
   }
 }

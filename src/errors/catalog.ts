@@ -6,7 +6,8 @@ export enum ErrorTypes {
   EntityNotFound = 'EntityNotFound',
   ConflictError = 'ConflictError',
   InvalidFormatError = 'InvalidFormatError',
-  ValidationError = 'ValidationError'
+  ValidationError = 'ValidationError',
+  UnauthorizedError = 'UnauthorizedError'
 }
 
 interface ErrorResponseObject {
@@ -42,5 +43,9 @@ export const errorCatalog: ErrorCatalog = {
   ValidationError: {
     message: 'Validation Error',
     httpStatus: StatusCodes.BAD_REQUEST
+  },
+  UnauthorizedError: {
+    message: 'Unauthorized Access',
+    httpStatus: StatusCodes.UNAUTHORIZED
   },
 }

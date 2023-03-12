@@ -1,8 +1,11 @@
+import md5 from 'md5';
 import User from '../models/User';
+import { userSchema } from '../utils/validations';
 
 export default class UserService {
-  createUser = async (username: string, password: string) => {
-    const user = await User.create({ username, password });
+  createUser = async (username: string, password: string): Promise<User> => {
+    userSchema({ username, password });
+    const user = await User.create({ username, password: md5(password) });
     if (!user) throw Error('ConflictError');
     return user;
   }
@@ -13,9 +16,17 @@ export default class UserService {
     return user;
   }
 
-  getUserByUsername = async (username: string) => {
+  getUserByUsername = async (username: string): Promise<User> => {
     const user = await User.findOne({ where: { username } });
     if (!user) throw Error('EntityNotFound');
     return user;
+  }
+
+  login = async (username: string, password: string) => {
+    const user = await this.getUserByUsername(username);
+    if (!user || user.password !== md5(password)) {
+      throw Error('UnauthorizedError');
+    }
+    return { id: user.id, username: user.username }
   }
 }
