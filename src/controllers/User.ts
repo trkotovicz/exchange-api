@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import UserService from '../services/User';
 
 export default class UserController {
@@ -7,26 +8,20 @@ export default class UserController {
   createUser = async (req: Request, res: Response) => {
     const { username, password } = req.body;
     const user = await this.userService.createUser(username, password);
-    res.status(201).json(user);
+    if (!user) throw Error('ConflictError');
+    res.status(StatusCodes.CREATED).json(user);
   }
 
-  // static async getUserById(req: Request, res: Response) {
-  //   const { id } = req.params;
-  //   const user = await UserService.getUserById(Number(id));
-  //   if (user) {
-  //     res.json(user);
-  //   } else {
-  //     res.status(404).json({ message: 'User not found' });
-  //   }
-  // }
+  getUserById = async (req: Request, res: Response) => {
+    const user = await this.userService.getUserById(Number(req.params));
+    const { id, username } = user;
+    res.status(StatusCodes.OK).json({ id, username });
+  }
 
-  // static async getUserByUsername(req: Request, res: Response) {
-  //   const { username } = req.params;
-  //   const user = await UserService.getUserByUsername(username);
-  //   if (user) {
-  //     res.json(user);
-  //   } else {
-  //     res.status(404).json({ message: 'User not found' });
-  //   }
-  // }
+  getUserByUsername = async (req: Request, res: Response) => {
+    const { q } = req.query;
+    const user = await this.userService.getUserByUsername(String(q));
+    const { id, username } = user;
+    res.status(StatusCodes.OK).json({ id, username });
+  }
 }
