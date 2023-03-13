@@ -1,5 +1,6 @@
 import Exchange from '../models/Exchange';
 import fetchExchangeApi from '../utils/fetchExchangeApi';
+import { transcationSchema } from '../utils/validations';
 
 export default class ExchangeService {
   listExchanges = async () => {
@@ -8,6 +9,7 @@ export default class ExchangeService {
   }
 
   createTransaction = async (base: string, originalValue: number, exchangeCoin: string, userId: number) => {
+    transcationSchema({ base, originalValue, exchangeCoin });
     const exchangeRate = await this.listExchanges();
     const createTransaction = await Exchange.create({
       userId,

@@ -1,4 +1,5 @@
 import sqlite3 from 'sqlite3';
+import { ValidationError } from 'joi';
 import { ErrorRequestHandler } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { errorCatalog, ErrorTypes } from '../errors/catalog';
@@ -9,6 +10,11 @@ const errorHandler: ErrorRequestHandler = (
   res,
   _next
 ) => {
+  // o instanceof verifica se esse é erro é uma instância do Joi
+  // if (err instanceof ValidationError) {
+  //   return res.status(StatusCodes.BAD_REQUEST).json(err.message)
+  // }
+
   // verifica se o erro é uma instância do sqlite
   // if (err instanceof sqlite3.Database) {
   //   return res.status(StatusCodes.BAD_REQUEST).json(err.message);
