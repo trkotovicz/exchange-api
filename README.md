@@ -1,51 +1,44 @@
 # Conversor de moedas
 
-Você deverá implementar uma API Rest que seja capaz de realizar a conversão entre duas moedas
-utilizando taxas de conversões atualizadas de um serviço externo.
+VocÃª deverÃ¡ implementar uma API Rest que seja capaz de realizar a conversÃ£o entre duas moedas utilizando taxas de conversÃµes atualizadas de um serviÃ§o externo.
+Para realiza-lo da conversÃ£o Ã© necessÃ¡rio o ID do usuÃ¡rio que deseja realizar a conversÃ£o.
+A API deverÃ¡ registrar cada transaÃ§Ã£o de conversÃ£o com todas as informaÃ§Ãµes relacionadas e tambÃ©m disponibilizar um endpoint para consulta das transaÃ§Ãµes realizadas por um usuÃ¡rio.
+O projeto deverÃ¡ ser feito em Node.js com TypeScript.
+1. Deve ser possÃ­vel realizar a conversÃ£o entre 4 moedas no mÃ­nimo (BRL, USD, EUR, JPY);
+2. As taxas de conversÃ£o devem ser obtidas de [https://api.exchangeratesapi.io/latest?base=EUR](Usar a API Free - Tem limitaÃ§Ã£o de requisiÃ§Ãµes, e apenas conversÃ£o com base na moeda EUR);
+3. As transaÃ§Ãµes de conversÃ£o devem ser persistidas no banco de dados (embedded) contendo:
+  * ID do usuÃ¡rio;
+  * Moeda origem;
+  * Valor origem;
+  * Moeda destino;
+  * Taxa de conversÃ£o utilizada;
+  * Data/Hora UTC;
+4. Uma transaÃ§Ã£o com sucesso deve retornar:
+  * ID da transaÃ§Ã£o
+  * ID do usuÃ¡rio;
+  * Moeda origem;
+  * Valor origem;
+  * Moeda destino;
+  * Valor destino;
+  * Taxa de conversÃ£o utilizada;
+  * Data/Hora UTC;
+5. Os casos de falha devem retornar com status code pertinente e descriÃ§Ã£o no corpo;
+6. DeverÃ¡ existir um endpoint para listagem de todas as transaÃ§Ãµes realizadas por usuÃ¡rio;
+7. Deve haver uma cobertura satisfatÃ³ria de testes;
+8. Deve-se adicionar a esse arquivo explicaÃ§Ãµes sobre como rodar a aplicaÃ§Ã£o, e uma apresentaÃ§Ã£o sobre o projeto: propÃ³sito, features, motivaÃ§Ã£o das principais escolhas de tecnologias, e separaÃ§Ã£o das camadas;
+9. Todo o cÃ³digo deve ser em inglÃªs;
+10. Disponibilizar o cÃ³digo apenas nesse repositÃ³rio, sem nenhuma cÃ³pia pÃºblica, para evitar plÃ¡gio; 
 
-Para realização da conversão é necessário o ID do usuário que deseja realizar a conversão.
+## Itens desejÃ¡veis
 
-A API deverá registrar cada transação de conversão com todas as informações relacionadas e também
-disponibilizar um endpoint para consulta das transações realizadas por um usuário.
-
-O projeto deverá ser feito em Node.js com TypeScript.
-
-1. Deve ser possível realizar a conversão entre 4 moedas no mínimo (BRL, USD, EUR, JPY);
-1. As taxas de conversão devem ser obtidas de [https://api.exchangeratesapi.io/latest?base=EUR] 
-  (Usar a API Free - Tem limitação de requisições, e apenas conversão com base na moeda EUR);
-1. As transações de conversão devem ser persistidas no banco de dados (embedded) contendo:
-    * ID do usuário;
-    * Moeda origem;
-    * Valor origem;
-    * Moeda destino;
-    * Taxa de conversão utilizada;
-    * Data/Hora UTC;
-1. Uma transação com sucesso deve retornar:
-    * ID da transação
-    * ID do usuário;
-    * Moeda origem;
-    * Valor origem;
-    * Moeda destino;
-    * Valor destino;
-    * Taxa de conversão utilizada;
-    * Data/Hora UTC;
-1. Os casos de falha devem retornar com status code pertinente e descrição no corpo;
-1. Deverá existir um endpoint para listagem de todas as transações realizadas por usuário;
-1. Deve haver uma cobertura satisfatória de testes;
-1. Deve-se adicionar a esse arquivo explicações sobre como rodar a aplicação, e uma apresentação sobre o
-projeto: propósito, features, motivação das principais escolhas de tecnologias, e separação das camadas;
-1. Todo o código deve ser em inglês;
-1. Disponibilizar o código apenas nesse repositório, sem nenhuma cópia pública, para evitar plágio;
-
-## Itens desejáveis
 * Logs
-* Tratamento de exceções
-* Documentação
-* Coesão de commits
+* Tratamento de exceÃ§Ãµes
+* DocumentaÃ§Ã£o
+* CoesÃ£o de commits
 * Mensagens de commits claras
-* Configuração de lint
-* Testes unitários
-* Testes de integração
-* Documentação dos endpoints
-* Estar rodando e disponível (Ex: Heroku, ou similar)
+* ConfiguraÃ§Ã£o de lint
+* Testes unitÃ¡rios
+* Testes de integraÃ§Ã£o
+* DocumentaÃ§Ã£o dos endpoints
+* Estar rodando e disponÃ­vel (Ex: Heroku, ou similar)
 * CI/CD
