@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import JwtService from '../services/jwtService';
 import UserService from '../services/User';
 
 export default class UserController {
@@ -13,7 +14,7 @@ export default class UserController {
   }
 
   getUserById = async (req: Request, res: Response) => {
-    const user = await this.userService.getUserById(Number(req.params));
+    const user = await this.userService.getUserById(Number(req.params.id));   
     const { id, username } = user;
     res.status(StatusCodes.OK).json({ id, username });
   }
@@ -21,6 +22,7 @@ export default class UserController {
   login = async (req: Request, res: Response) => {
     const { username, password } = req.body;
     const user = await this.userService.login(username, password);
-    res.status(StatusCodes.OK).json(user);
+    const token = JwtService.createToken(user);
+    res.status(StatusCodes.OK).json({ user, token });
   }
 }

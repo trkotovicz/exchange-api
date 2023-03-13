@@ -7,7 +7,8 @@ export enum ErrorTypes {
   ConflictError = 'ConflictError',
   InvalidFormatError = 'InvalidFormatError',
   ValidationError = 'ValidationError',
-  UnauthorizedError = 'UnauthorizedError'
+  UnauthorizedError = 'UnauthorizedError',
+  InvalidToken = 'InvalidToken'
 }
 
 interface ErrorResponseObject {
@@ -46,6 +47,10 @@ export const errorCatalog: ErrorCatalog = {
   },
   UnauthorizedError: {
     message: 'Unauthorized Access',
+    httpStatus: StatusCodes.UNAUTHORIZED
+  },
+  InvalidToken: {
+    message: 'Invalid Token',
     httpStatus: StatusCodes.UNAUTHORIZED
   },
 }
