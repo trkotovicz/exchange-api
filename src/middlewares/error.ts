@@ -1,5 +1,5 @@
-import sqlite3 from 'sqlite3';
-import { ValidationError } from 'joi';
+import Joi from 'joi';
+import { ValidationError } from 'sequelize';
 import { ErrorRequestHandler } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { errorCatalog, ErrorTypes } from '../errors/catalog';
@@ -8,39 +8,30 @@ const errorHandler: ErrorRequestHandler = (
   err: Error,
   _req,
   res,
-  _next
+  _next,
 ) => {
-  // o instanceof verifica se esse é erro é uma instância do Joi
-  // if (err instanceof ValidationError) {
-  //   return res.status(StatusCodes.BAD_REQUEST).json(err.message)
-  // }
-
-  // verifica se o erro é uma instância do sqlite
-  // if (err instanceof sqlite3.Database) {
-  //   return res.status(StatusCodes.BAD_REQUEST).json(err.message);
-  // }
-
-  if (err.message) {
-    return res.status(StatusCodes.BAD_REQUEST).json(err.message)
+  // verifica se é uma instância do joi
+  if (err instanceof Joi.ValidationError) {
+    return res.status(StatusCodes.BAD_REQUEST).json(err.message);
   }
-  // aqui vamos fazer o cast da mensagem de erro para uma chave do Enum ErrorTypes
-  // com o keyof typeof - traduzindo seria algo como 'chaves do tipo de'
-  // dizemos que o `err.message` é alguma das chaves do ErrorTypes
-  const messageAsErrorType = err.message as keyof typeof ErrorTypes
 
-  // vamos usar a mensagem para acessar um erro do nosso catálogo
-  // se a mensagem não for uma chave do nosso catálogo "mappedError" vai retornar undefined e não entrar no "if"
-  const mappedError = errorCatalog[messageAsErrorType]
+  // sequelize errors
+  if (err instanceof ValidationError) {
+    return res.status(StatusCodes.BAD_REQUEST).json(err.message);
+  }
+
+  const messageAsErrorType = err.message as keyof typeof ErrorTypes;
+
+  const mappedError = errorCatalog[messageAsErrorType];
   if (mappedError) {
-    // dado que o erro está mapeado no nosso catálogo
-    // "mappedError" tem valores necessário para responder a requisição
-    const { httpStatus, message } = mappedError
-    return res.status(httpStatus).json({ error: message })
+    const { httpStatus, message } = mappedError;
+    return res.status(httpStatus).json({ error: message });
   }
 
-  // caso seja um erro não mapeado, o mostraremos no log de erros e retornaremos o status 500
-  console.error(err)
-  return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'internal error' })
-}
+  console.error(err);
+  return res
+    .status(StatusCodes.INTERNAL_SERVER_ERROR)
+    .json({ message: 'internal error' });
+};
 
 export default errorHandler;

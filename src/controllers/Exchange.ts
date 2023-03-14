@@ -19,4 +19,11 @@ export default class ExchangeController {
     const response = await this.exchangeService.createTransaction(base, originalValue, exchangeCoin, Number(tokenPayload.id));
     res.status(StatusCodes.CREATED).json(response);
   }
+
+  listAllTransactions = async (req: Request, res: Response) => {
+    const token = req.headers.authorization;
+    const tokenPayload = JwtService.validateToken(String(token));
+    const response = await this.exchangeService.listAllTransactions(Number(tokenPayload.id));
+    res.status(StatusCodes.CREATED).json(response);
+  }
 }

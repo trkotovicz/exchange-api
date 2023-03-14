@@ -5,10 +5,10 @@ export enum ErrorTypes {
   BadRequest = 'BadRequest',
   EntityNotFound = 'EntityNotFound',
   ConflictError = 'ConflictError',
-  InvalidFormatError = 'InvalidFormatError',
   ValidationError = 'ValidationError',
   UnauthorizedError = 'UnauthorizedError',
-  InvalidToken = 'InvalidToken'
+  InvalidToken = 'InvalidToken',
+  NotFoundTransactions = 'NotFoundTransactions'
 }
 
 interface ErrorResponseObject {
@@ -37,10 +37,6 @@ export const errorCatalog: ErrorCatalog = {
     message: 'Entity already exists',
     httpStatus: StatusCodes.CONFLICT
   },
-  InvalidFormatError: {
-    message: 'Invalid Format',
-    httpStatus: StatusCodes.BAD_REQUEST
-  },
   ValidationError: {
     message: 'Validation Error',
     httpStatus: StatusCodes.BAD_REQUEST
@@ -52,5 +48,9 @@ export const errorCatalog: ErrorCatalog = {
   InvalidToken: {
     message: 'Invalid Token',
     httpStatus: StatusCodes.UNAUTHORIZED
+  },
+  NotFoundTransactions: {
+    message: 'No transactions found for this user',
+    httpStatus: StatusCodes.NOT_FOUND
   },
 }

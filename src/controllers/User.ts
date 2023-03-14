@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import { ErrorTypes } from '../errors/catalog';
 import JwtService from '../services/jwtService';
 import UserService from '../services/User';
 
@@ -9,7 +10,7 @@ export default class UserController {
   createUser = async (req: Request, res: Response) => {
     const { username, password } = req.body;
     const user = await this.userService.createUser(username, password);
-    if (!user) throw Error('ConflictError');
+    if (!user) throw new Error(ErrorTypes.ConflictError);
     res.status(StatusCodes.CREATED).json(user);
   }
 

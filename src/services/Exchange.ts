@@ -22,4 +22,9 @@ export default class ExchangeService {
 
     return createTransaction;
   }
+
+  listAllTransactions = async (userId: number) => {
+    const transactions = await Exchange.findAll({ where: { userId } });
+    return transactions;
+  }
 }

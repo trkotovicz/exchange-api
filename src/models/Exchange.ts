@@ -2,14 +2,14 @@ import { Model, DataTypes, NOW } from 'sequelize';
 import sequelize from '../utils/sequelizeConfig';
 
 interface ExchangeAttributes {
-  id?: number;  // ID da transação
-  userId: number;   // ID do usuário
-  base: string;   // Moeda origem
-  originalValue: number;  // Valor origem
-  exchangeCoin: string;   // Moeda destino
-  exchangedValue: number;   // Valor destino
-  rate: number;   // Taxa de conversão utilizada
-  date?: Date;   // Data/Hora UTC
+  id?: number;
+  userId: number;
+  base: string;
+  originalValue: number;
+  exchangeCoin: string;
+  exchangedValue: number;
+  rate: number;
+  date?: Date;
 }
 
 class Exchange extends Model<ExchangeAttributes> implements ExchangeAttributes {
