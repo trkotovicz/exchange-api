@@ -39,6 +39,6 @@ O projeto deverá ser feito em Node.js com TypeScript.
  - [X]  Configuração de lint
  - [ ]  Testes unitários
  - [ ] Testes de integração
- - [ ] Documentação dos endpoints
+ - [X] Documentação dos endpoints
  - [ ] Estar rodando e disponível (Ex: Heroku, ou similar)
  - [ ] CI/CD
