@@ -31,14 +31,14 @@ O projeto deverá ser feito em Node.js com TypeScript.
 
 ## Itens desejáveis
 
-* Logs
-* Tratamento de exceções
-* Documentação
-* Coesão de commits
-* Mensagens de commits claras
-* Configuração de lint
-* Testes unitários
-* Testes de integração
-* Documentação dos endpoints
-* Estar rodando e disponível (Ex: Heroku, ou similar)
-* CI/CD
+ - [X]  Logs
+ - [X] Tratamento de exceções
+ - [ ]  Documentação
+ - [X]  Coesão de commits
+ - [X]  Mensagens de commits claras
+ - [X]  Configuração de lint
+ - [ ]  Testes unitários
+ - [ ] Testes de integração
+ - [ ] Documentação dos endpoints
+ - [ ] Estar rodando e disponível (Ex: Heroku, ou similar)
+ - [ ] CI/CD
