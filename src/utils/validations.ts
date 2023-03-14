@@ -13,10 +13,10 @@ const userSchema = (data: object) => {
 
 const transcationSchema = (data: object) => {
   const schema = Joi.object({
-    base: Joi.string().length(3).uppercase().valid('EUR'),
-    originalValue: Joi.number().positive().precision(2),
-    exchangeCoin: Joi.string().length(3).uppercase(),
-  }).required();
+    base: Joi.string().length(3).uppercase().valid('EUR').required(),
+    originalValue: Joi.number().positive().precision(2).required(),
+    exchangeCoin: Joi.string().length(3).uppercase().required(),
+  });
 
   const { error, value } = schema.validate(data);
   if (error) throw new Error(error.message);

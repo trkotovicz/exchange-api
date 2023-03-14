@@ -1,4 +1,4 @@
-import { StatusCodes } from 'http-status-codes'
+import { StatusCodes } from 'http-status-codes';
 
 export enum ErrorTypes {
   GenericError = 'GenericError',
@@ -42,7 +42,7 @@ export const errorCatalog: ErrorCatalog = {
     httpStatus: StatusCodes.BAD_REQUEST
   },
   UnauthorizedError: {
-    message: 'Unauthorized Access',
+    message: 'Invalid username or password',
     httpStatus: StatusCodes.UNAUTHORIZED
   },
   InvalidToken: {
