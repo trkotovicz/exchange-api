@@ -1,16 +1,11 @@
 import chai from "chai";
-import chaiAsPromised from "chai-as-promised";
-import sinonChai from "sinon-chai";
 import sinon from "sinon";
 import Exchange from "../../src/models/Exchange";
 import ExchangeService from "../../src/services/Exchange";
-import { ErrorTypes } from "../../src/errors/catalog";
-import { bodyExchangeSuccess, bodyExchangeFailure, mockFetchResponse } from "../mocks/exchangeMocks";
+import { mockFetchResponse } from "../mocks/exchangeMocks";
 
 const { expect } = chai;
 
-chai.use(sinonChai);
-chai.use(chaiAsPromised);
 
 describe('Exchange unit tests', () => {
 
@@ -66,7 +61,50 @@ describe('Exchange unit tests', () => {
     });
   });
 
-  // describe('listAllTransactions', () => {
-
-  // });
+  describe('listAllTransactions', () => {
+    let exchangeService: ExchangeService;
+    let mockFindAll: sinon.SinonStub;
+  
+    beforeEach(() => {
+      mockFindAll = sinon.stub(Exchange, 'findAll');
+      exchangeService = new ExchangeService();
+    });
+  
+    afterEach(() => {
+      mockFindAll.restore();
+    });
+  
+    it('should return all transactions of the given user', async () => {
+      const userId = 123;
+      const mockTransactions = [
+        {
+          id: 1,
+          userId,
+          base: 'USD',
+          originalValue: 100,
+          exchangeCoin: 'BRL',
+          exchangedValue: 500,
+          rate: 5,
+          date: 1647343801000
+        },
+        {
+          id: 2,
+          userId,
+          base: 'EUR',
+          originalValue: 50,
+          exchangeCoin: 'JPY',
+          exchangedValue: 7500,
+          rate: 150,
+          date: 1647343852000
+        }
+      ];
+      mockFindAll.resolves(mockTransactions);
+  
+      const result = await exchangeService.listAllTransactions(userId);
+  
+      expect(result).to.deep.equal(mockTransactions);
+      sinon.assert.calledOnce(mockFindAll);
+      sinon.assert.calledWith(mockFindAll, { where: { userId } });
+    });
+  });
 });
