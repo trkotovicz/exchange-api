@@ -14,12 +14,6 @@ export default class UserService {
     return user;
   }
 
-  // getUserById = async (id: number): Promise<User> => {
-  //   const user = await User.findByPk(id);
-  //   if (!user) throw new Error(ErrorTypes.EntityNotFound);
-  //   return user;
-  // }
-
   getUserByUsername = async (username: string): Promise<User> => {
     const user = await User.findOne({ where: { username } });
     if (!user) throw new Error(ErrorTypes.EntityNotFound);

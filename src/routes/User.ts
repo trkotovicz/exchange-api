@@ -1,15 +1,10 @@
 import { Router } from 'express';
-// import authMiddleware from '../middlewares/authMiddleware';
 import { userController } from './main';
 
 const userRouter = Router();
 
 userRouter.post('/login', userController.login);
 userRouter.post('/user', userController.createUser);
-
-// userRouter.use(authMiddleware);
-
-// userRouter.get('/user/:id', userController.getUserById);
 
 export default userRouter;
 
@@ -72,19 +67,6 @@ export default userRouter;
  *            password:
  *              type: string
  */
-
-// /**
-//  * @swagger
-//  *  components:
-//  *    schemas:
-//  *       UserIdResponse:
-//  *         type: object
-//  *         properties:
-//  *            id:
-//  *              type: integer
-//  *            username:
-//  *              type: string
-//  */
 
 /**
  * @swagger
@@ -149,26 +131,3 @@ export default userRouter;
  *                  type: object
  *                  $ref: '#/components/schemas/UserResponse'
  */
-
-// /**
-//  * @swagger
-//  *   /user/{id}:
-//  *      get:
-//  *        tags: [User]
-//  *        description: Retorna os dados de um usuário
-//  *        parameters:
-//  *          - in: path
-//  *            name: id
-//  *            type: string
-//  *            required: true
-//  *        security:
-//  *          - apiKey: []
-//  *        responses:
-//  *          200:
-//  *            description: OK
-//  *            content:
-//  *              application/json:
-//  *                schema:
-//  *                  type: object
-//  *                  $ref: '#/components/schemas/UserIdResponse'
-//  */
