@@ -58,4 +58,62 @@ describe('UserService', () => {
       });
     });
   });
+
+  describe('login', () => {
+    const username = 'johndoe';
+    const password = 'mocked_password';
+    const wrongPassword = 'wrong_password';
+    const mockUser = {
+      id: 1,
+      username: 'johndoe',
+      password: md5(password)
+    } as User;
+
+    it('should return user id and username if login is successful', async () => {
+      const userService = new UserService();
+      const getUserStub = sinon.stub(userService, 'getUserByUsername').resolves(mockUser);
+
+      const result = await userService.login(username, password);
+      expect(getUserStub.calledOnceWith(username)).to.be.true;
+      expect(result).to.deep.equal({ id: mockUser.id, username: mockUser.username });
+
+      getUserStub.restore();
+    });
+
+    it('should throw an error if user does not exist', async () => {
+      const userService = new UserService();
+      const getUserStub = sinon.stub(userService, 'getUserByUsername').throws(new Error(ErrorTypes.EntityNotFound));
+
+      try {
+        await userService.login(username, password);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          expect(getUserStub.calledOnceWithExactly(username)).to.be.true;
+          expect(error.message).to.equal('EntityNotFound');
+        } else {
+          throw new Error('Caught exception is not of type Error');
+        }
+      }
+
+      getUserStub.restore();
+    });
+
+    it('should throw an error if password is incorrect', async () => {
+      const userService = new UserService();
+      const getUserStub = sinon.stub(userService, 'getUserByUsername').resolves(mockUser);
+
+      try {
+        await userService.login(username, wrongPassword);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          expect(getUserStub.calledOnceWithExactly(username)).to.be.true;
+          expect(error.message).to.equal('UnauthorizedError');
+        } else {
+          throw new Error('Caught exception is not of type Error');
+        }
+      }
+
+      getUserStub.restore();
+    });
+  });
 });
