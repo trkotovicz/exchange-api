@@ -11,7 +11,7 @@ const userSchema = (data: object) => {
   return value;
 };
 
-const transcationSchema = (data: object) => {
+const transactionSchema = (data: object) => {
   const schema = Joi.object({
     base: Joi.string().length(3).uppercase().valid('EUR').required(),
     originalValue: Joi.number().positive().precision(2).required(),
@@ -23,4 +23,4 @@ const transcationSchema = (data: object) => {
   return value;
 };
 
-export { userSchema, transcationSchema };
+export { userSchema, transactionSchema };
