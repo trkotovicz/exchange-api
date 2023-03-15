@@ -3,8 +3,10 @@ import fetchExchangeApi from '../utils/fetchExchangeApi';
 import { transcationSchema } from '../utils/validations';
 
 export default class ExchangeService {
+  constructor(private fetcher = fetchExchangeApi) {}
+
   listExchanges = async () => {
-    const exchange = await fetchExchangeApi();
+    const exchange = await this.fetcher();
     return exchange;
   }
 
