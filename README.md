@@ -14,13 +14,13 @@ Para deploy da aplicação, foi utilizado o [Railway](https://exchange-api.up.ra
 
 ### Inicialização via Docker 🐳
 
-1. Clone o repositório `https://bitbucket.org/recrutamento_jya_nodejs/recrutamento-conversor-nodejs-thais_kotovicz_hotmail.com`.
+1. Clone o repositório `git@github.com:trkotovicz/exchange-api.git`.
 2. Na raíz do repositório, abra o terminal e rode o comando `npm run compose:up` e aguarde a alicação subir (esse passo pode demorar um pouco).
 3. Para encerrar a aplicação, rode o comando `npm run compose:down`.
 
 ### Inicialização local 🖥
 
-1. Clone o repositório `https://bitbucket.org/recrutamento_jya_nodejs/recrutamento-conversor-nodejs-thais_kotovicz_hotmail.com`.
+1. Clone o repositório `git@github.com:trkotovicz/exchange-api.git`.
 2. Na raíz do repositório instale as dependências e inicialize o projeto com o comando `npm start`.
 3. Abra o navegador no endereço `http://localhost:3001/docs/#/` para testar a API.
 
