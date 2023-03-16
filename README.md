@@ -37,8 +37,8 @@ O projeto deverá ser feito em Node.js com TypeScript.
  - [X]  Coesão de commits
  - [X]  Mensagens de commits claras
  - [X]  Configuração de lint
- - [ ]  Testes unitários
- - [ ]  Testes de integração
+ - [X]  Testes unitários
+ - [X]  Testes de integração
  - [X]  Documentação dos endpoints
  - [ ]  Estar rodando e disponível (Ex: Heroku, ou similar)
  - [ ]  CI/CD
