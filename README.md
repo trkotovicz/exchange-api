@@ -1,44 +1,68 @@
 # Conversor de moedas
 
-Você deverá implementar uma API Rest que seja capaz de realizar a conversão entre duas moedas utilizando taxas de conversões atualizadas de um serviço externo.
-Para realiza-lo da conversão é necessário o ID do usuário que deseja realizar a conversão.
-A API deverá registrar cada transação de conversão com todas as informações relacionadas e também disponibilizar um endpoint para consulta das transações realizadas por um usuário.
-O projeto deverá ser feito em Node.js com TypeScript.
-1. Deve ser possível realizar a conversão entre 4 moedas no mínimo (BRL, USD, EUR, JPY);
-2. As taxas de conversão devem ser obtidas de [https://api.exchangeratesapi.io/latest?base=EUR](Usar a API Free - Tem limitação de requisições, e apenas conversão com base na moeda EUR);
-3. As transações de conversão devem ser persistidas no banco de dados (embedded) contendo:
-  * ID do usuário;
-  * Moeda origem;
-  * Valor origem;
-  * Moeda destino;
-  * Taxa de conversão utilizada;
-  * Data/Hora UTC;
-4. Uma transação com sucesso deve retornar:
-  * ID da transação
-  * ID do usuário;
-  * Moeda origem;
-  * Valor origem;
-  * Moeda destino;
-  * Valor destino;
-  * Taxa de conversão utilizada;
-  * Data/Hora UTC;
-5. Os casos de falha devem retornar com status code pertinente e descrição no corpo;
-6. Deverá existir um endpoint para listagem de todas as transações realizadas por usuário;
-7. Deve haver uma cobertura satisfatória de testes;
-8. Deve-se adicionar a esse arquivo explicações sobre como rodar a aplicação, e uma apresentação sobre o projeto: propósito, features, motivação das principais escolhas de tecnologias, e separação das camadas;
-9. Todo o código deve ser em inglês;
-10. Disponibilizar o código apenas nesse repositório, sem nenhuma cópia pública, para evitar plágio; 
+Essa aplicação é uma API Rest capaz de realizar a conversão entre duas moedas utilizando taxas de conversões atualizadas de um serviço externo [(API Free)](https://apilayer.com/marketplace/exchangerates_data-api?utm_source=apilayermarketplace&utm_medium=featured), para consumir dessa API é necessário fazer um cadastro e gerar uma API_KEY.
+Para realizar a conversão é necessário o ID do usuário que deseja realizar a conversão. Por isso, é preciso estar logado para poder realizar uma transação de conversão de moeda.
+A API registra cada transação de conversão com todas as informações relacionadas e também disponibilizar um endpoint para consulta das transações realizadas por um usuário.
+
+## Ferramentas utilizadas
+
+A aplicação foi desenvolvida no modelo de camadas MSC (Model-Service_COntroller) em Node.js, utilizando Typescript, Express.js, banco de dados SQLite, ORM Sequelize e Swagger para a documentação. Tem autenticação de usuário dom Json Web Token (JWT). Além disso, é possível radar a aplicação pelo Docker.
+Para os testes unitários e de integração, foi utilizado Mocha, Chai e Sinon.
+Para deploy da aplicação, foi utilizado o [Railway](https://exchange-api.up.railway.app/).
+
+## Inicialização da Aplicação
+
+### Inicialização via Docker 🐳
+
+1. Clone o repositório `https://bitbucket.org/recrutamento_jya_nodejs/recrutamento-conversor-nodejs-thais_kotovicz_hotmail.com`.
+2. Na raíz do repositório, abra o terminal e rode o comando `npm run compose:up` e aguarde a alicação subir (esse passo pode demorar um pouco).
+3. Para encerrar a aplicação, rode o comando `npm run compose:down`.
+
+### Inicialização local 🖥
+
+1. Clone o repositório `https://bitbucket.org/recrutamento_jya_nodejs/recrutamento-conversor-nodejs-thais_kotovicz_hotmail.com`.
+2. Na raíz do repositório instale as dependências e inicialize o projeto com o comando `npm start`.
+3. Abra o navegador no endereço `http://localhost:3001/docs/#/` para testar a API.
+
+## Testes
+
+Para testar a aplicação, depois de ter instalado as dependências, basta abrir o terminal na raíz do repositório e rodar o comando `npm test` ou `npm run test`.
+
+## API
+
+Com a aplicação rodando acesse a [documentação da API](http://localhost:3001/docs/#/). </br>
+
+## Utilização da Aplicação
+
+1. Crie o arquivo `.env` na pasta raíz e informe a sua `API_KEY`.
+2. Para utilizar a aplicação, e necessário criar um novo usuário. Para isso, acesse a rota `/user` e informe `username` e `password`.
+3. Acesse a rota `/login` e informe os dados de usuário criados anteriormente.
+4. Para acessar as rotas de conversão `/exchange`, é necessário informar no headers da sua requisição o token gerado no login.
+5. Para acessar todas as transações feitas pelo usuário,  acesse a rota `/exchange/user` informando o token.
+
+*Nota: A sua primeira requisição de conversão pode demorar um pouquinho para retornar, pois ele busca as taxas de todas as moedas disponíveis na API externa.
+
+## Melhorias Futuras
+
+- Corrigir o erro de deploy no Railway (está retornando um erro de token inválido ao tentar acessar a aplicação).
+- Adicionar um fluxo de entrega contínua (CI/CD).
+- Melhorar os testes unitários e de integração da aplicação.
 
 ## Itens desejáveis
 
- - [X]  Logs
- - [X]  Tratamento de exceções
- - [ ]  Documentação
- - [X]  Coesão de commits
- - [X]  Mensagens de commits claras
- - [X]  Configuração de lint
- - [X]  Testes unitários
- - [X]  Testes de integração
- - [X]  Documentação dos endpoints
- - [ ]  Estar rodando e disponível (Ex: Heroku, ou similar)
- - [ ]  CI/CD
+ - [x]  Logs
+ - [x] Tratamento de exceções
+ - [x]  Documentação
+ - [x]  Coesão de commits
+ - [x]  Mensagens de commits claras
+ - [x]  Configuração de lint
+ - [x]  Testes unitários
+ - [x] Testes de integração
+ - [x] Documentação dos endpoints
+ - [x] Estar rodando e disponível (Ex: Heroku, ou similar)
+ - [ ] CI/CD
+ 
+ ---
+
+Projeto desenvolvido por [Thais R Kotovicz](https://www.linkedin.com/in/thaiskotovicz/).
+</br>
