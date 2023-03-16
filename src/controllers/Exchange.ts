@@ -6,7 +6,7 @@ import JwtService from '../services/jwtService';
 export default class ExchangeController {
   constructor(private exchangeService: ExchangeService) {}
 
-  createTransaction = async (req: Request, res: Response) => {
+  createTransaction = async (req: Request, res: Response): Promise<any> => {
     const { base, originalValue, exchangeCoin } = req.body;
     const token = req.headers.authorization;
     const tokenPayload = JwtService.validateToken(String(token));

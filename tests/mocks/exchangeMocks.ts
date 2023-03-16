@@ -1,13 +1,4 @@
-export const bodyExchangeSuccess = {
-  base: "EUR",
-  originalValue: 1,
-  exchangeCoin: "BRL"
-};
-
-export const bodyExchangeFailure = {
-  base: "EUR",
-  originalValue: 1
-};
+import Exchange from "../../src/models/Exchange";
 
 export const mockFetchResponse = {
   success: true,
@@ -187,3 +178,44 @@ export const mockFetchResponse = {
     ZWL: 340.722346
   }
 }
+
+export const exchangeMock = {
+  userId: 1,
+  responseSuccess: {
+    date: "2023-03-15T21:15:12.606Z",
+    id: 1,
+    userId: 1,
+    base: "EUR",
+    originalValue: 1,
+    exchangeCoin: "BRL",
+    exchangedValue: 5.594814,
+    rate: 5.594814
+  }
+}
+
+export const mockResponseSuccess = {
+  date: "2023-03-15T21:15:12.606Z",
+  id: 1,
+  userId: 1,
+  base: "EUR",
+  originalValue: 1,
+  exchangeCoin: "BRL",
+  exchangedValue: 5.594814,
+  rate: 5.594814
+} as unknown as Exchange;
+
+export const mockUserJwt = {
+  id: 1,
+  username: "mocked_user",
+};
+
+export const mockBodySuccess = {
+  base: "EUR",
+  originalValue: 100,
+  exchangeCoin: "BRL"
+}
+
+export const bodyFailure = {
+  base: "EUR",
+  exchangeCoin: "BRL"
+};
