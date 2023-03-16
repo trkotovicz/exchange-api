@@ -1,13 +1,14 @@
 # Conversor de moedas
 
 Essa aplicação é uma API Rest capaz de realizar a conversão entre duas moedas utilizando taxas de conversões atualizadas de um serviço externo [(API Free)](https://apilayer.com/marketplace/exchangerates_data-api?utm_source=apilayermarketplace&utm_medium=featured), para consumir dessa API é necessário fazer um cadastro e gerar uma API_KEY.
-Para realizar a conversão é necessário o ID do usuário que deseja realizar a conversão. Por isso, é preciso estar logado para poder realizar uma transação de conversão de moeda.
+
+Para realizar a conversão é necessário o ID do usuário que deseja realizar a conversão. Por isso, é preciso estar logado para poder realizar uma transação de conversão de moeda.</br>
 A API registra cada transação de conversão com todas as informações relacionadas e também disponibilizar um endpoint para consulta das transações realizadas por um usuário.
 
 ## Ferramentas utilizadas
 
-A aplicação foi desenvolvida no modelo de camadas MSC (Model-Service_COntroller) em Node.js, utilizando Typescript, Express.js, banco de dados SQLite, ORM Sequelize e Swagger para a documentação. Tem autenticação de usuário dom Json Web Token (JWT). Além disso, é possível radar a aplicação pelo Docker.
-Para os testes unitários e de integração, foi utilizado Mocha, Chai e Sinon.
+A aplicação foi desenvolvida no modelo de camadas MSC (Model-Service-Conntroller) em Node.js, utilizando Typescript, Express.js, banco de dados SQLite, ORM Sequelize e Swagger para a documentação. Tem autenticação de usuário dom Json Web Token (JWT). Além disso, é possível radar a aplicação pelo Docker.</br>
+Para os testes unitários e de integração, foi utilizado Mocha, Chai e Sinon.</br>
 Para deploy da aplicação, foi utilizado o [Railway](https://exchange-api.up.railway.app/).
 
 ## Inicialização da Aplicação
