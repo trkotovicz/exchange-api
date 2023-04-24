@@ -1,5 +1,5 @@
 import { Response, NextFunction } from 'express';
-import JwtService, { IUserJwt } from '../services/jwtService';
+import JwtService from '../services/jwtService';
 import IRequestWithUser from '../interfaces/IRequestWithUser';
 
 export default function authCookieMiddleware(req: IRequestWithUser, res: Response, next: NextFunction) {
@@ -9,8 +9,8 @@ export default function authCookieMiddleware(req: IRequestWithUser, res: Respons
   res.cookie('token', token, {
   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 dias em milissegundos
   httpOnly: true,
-  secure: true,
-  sameSite: 'strict'
+  // secure: true,
+  // sameSite: 'strict'
   });
   
   next();
