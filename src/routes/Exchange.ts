@@ -1,9 +1,11 @@
 import { Router } from 'express';
 import authMiddleware from '../middlewares/authMiddleware';
 import { exchangeController } from './main';
+import authCookieMiddleware from '../middlewares/authCookieMiddleware';
 
 const exchangeRouter = Router();
 
+exchangeRouter.use(authCookieMiddleware);
 exchangeRouter.use(authMiddleware);
 
 exchangeRouter.post('/exchange', exchangeController.createTransaction);

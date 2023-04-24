@@ -2,7 +2,7 @@ import 'dotenv/config';
 import * as jwt from 'jsonwebtoken';
 import { ErrorTypes } from '../errors/catalog';
 
-interface IUserJwt {
+export interface IUserJwt {
   id: number
   username: string
 }
