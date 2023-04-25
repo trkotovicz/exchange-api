@@ -1,23 +1,32 @@
-import { Response, NextFunction } from 'express';
+import 'dotenv/config';
+import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
 import { ErrorTypes } from '../errors/catalog';
-import IRequestWithUser from '../interfaces/IRequestWithUser';
-import JwtService from '../services/jwtService';
 
-export default function authMiddleware(req: IRequestWithUser, res: Response, next: NextFunction) {  
-  // salva o token nos cookies
-  const tokenCookie = req.cookies;
-
-  if (!tokenCookie) {
-    throw new Error(ErrorTypes.InvalidToken);
-  }
-
-  try {
-    const userData = JwtService.validateToken(tokenCookie);
-    req.user = userData;
-    return next();
-  } catch (error) {
-    throw new Error(ErrorTypes.InvalidToken);
-  }
+interface AuthRequest extends Request {
+  userId: string;
 }
+
+interface DecodedToken {
+  id: string;
+  // outras propriedades do payload do token, se houver
+}
+
+const secret = process.env.JWT_SECRET as string;
+
+export default function authMiddleware(req: AuthRequest, res: Response, next: NextFunction) {  
+  const token = req.cookies?.token ?? null;
+
+  if (!token) {
+    throw new Error(ErrorTypes.InvalidToken);
+  }
+
+  jwt.verify(token, secret, (err: jwt.JsonWebTokenError, decoded: DecodedToken) => {
+    if (err) throw new Error(ErrorTypes.InvalidToken);
+
+    req.userId = decoded.id;
+    next();
+  });
+} 
 
 // https://github.com/expressjs/cookie-parser
