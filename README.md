@@ -7,9 +7,9 @@ A API registra cada transação de conversão com todas as informações relacio
 
 ## Ferramentas utilizadas
 
-A aplicação foi desenvolvida no modelo de camadas MSC (Model-Service-Conntroller) em Node.js, utilizando Typescript, Express.js, banco de dados SQLite, ORM Sequelize e Swagger para a documentação. Tem autenticação de usuário dom Json Web Token (JWT). Além disso, é possível radar a aplicação pelo Docker.</br>
+A aplicação segue os princípios do SOLID e foi desenvolvida no modelo de camadas MSC (Model-Service-Conntroller) em Node.js, utilizando Typescript, Express.js, banco de dados SQLite, ORM Sequelize, e Swagger para a documentação. Tem autenticação de usuário dom Json Web Token (JWT). Além disso, é possível rodar a aplicação pelo Docker.</br>
 Para os testes unitários e de integração, foi utilizado Mocha, Chai e Sinon.</br>
-Para deploy da aplicação, foi utilizado o [Railway](https://exchange-api.up.railway.app/).
+Para deploy da aplicação, foi utilizado o [Render](exchange-api.onrender.com).
 
 ## Inicialização da Aplicação
 
@@ -45,7 +45,7 @@ Com a aplicação rodando acesse a [documentação da API](http://localhost:3001
 
 ## Melhorias Futuras
 
-- Corrigir o erro de deploy no Railway (está retornando um erro de token inválido ao tentar acessar a aplicação).
+- Corrigir o erro de deploy no Render (está retornando um erro de token inválido ao tentar acessar a aplicação).
 - Adicionar um fluxo de entrega contínua (CI/CD).
 - Melhorar os testes unitários e de integração da aplicação.
 
@@ -61,7 +61,7 @@ Com a aplicação rodando acesse a [documentação da API](http://localhost:3001
  - [x] Testes de integração
  - [x] Documentação dos endpoints
  - [x] Estar rodando e disponível (Ex: Heroku, ou similar)
- - [ ] CI/CD
+ - [X] CI/CD
  
  ---
 
